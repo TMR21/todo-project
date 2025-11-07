@@ -7,6 +7,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 WORKDIR /github/workspace
 COPY . /github/workspace
 
-RUN chmod +x .github/scripts/*.sh
+RUN sed -i 's/\r$//' .github/scripts/*.sh && chmod +x .github/scripts/*.sh
 
-ENTRYPOINT ["/github/workspace/.github/scripts/entrypoint.sh"]
+ENTRYPOINT ["/bin/bash", "-c", "sed -i 's/\\r$//' /github/workspace/.github/scripts/*.sh && /github/workspace/.github/scripts/entrypoint.sh"]
