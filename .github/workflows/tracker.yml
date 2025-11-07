@@ -1,1 +1,14 @@
 
+name: Move Issue to Done
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  move_issue:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
+    steps:
+      - name: Log merge event
+        run: echo "PR #${{ github.event.pull_request.number }} merged."
